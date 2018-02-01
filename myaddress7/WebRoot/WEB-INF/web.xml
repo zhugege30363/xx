@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+
+	<filter>
+		<filter-name>encodeFilter</filter-name>
+		<filter-class>util.EncodeFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodeFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+	<!-- 	<dispatcher>FORWARD</dispatcher> -->
+	</filter-mapping>
+	
+	<listener>
+		<listener-class>util.CountListener</listener-class>
+	</listener>
+
+	<context-param>
+		<param-name>encode</param-name>
+		<param-value>UTF-8</param-value>
+	</context-param>
+
+  <servlet>
+    <servlet-name>FindAllServlet</servlet-name>
+    <servlet-class>action.FindAllServlet</servlet-class>
+  </servlet>
+  <!-- <servlet>
+    <servlet-name>FindAllServlet</servlet-name>
+    <servlet-class>com.sxt.action.FindAllServlet</servlet-class>
+  </servlet>  -->
+
+  <servlet-mapping>
+    <servlet-name>FindAllServlet</servlet-name>
+    <url-pattern>/findAllServlet</url-pattern>
+  </servlet-mapping>
+     <servlet>
+    <servlet-name>InitServlet</servlet-name>
+    <servlet-class>action.InitServlet</servlet-class>
+    <load-on-startup>0</load-on-startup>
+  </servlet>
+  <servlet>
+    <servlet-name>FindByPageServlet</servlet-name>
+    <servlet-class>action.FindByPageServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>InitServlet</servlet-name>
+    <url-pattern>/InitServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>FindByPageServlet</servlet-name>
+    <url-pattern>/findByPageServlet</url-pattern>
+  </servlet-mapping>
+  
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>

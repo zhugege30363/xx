@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" threshold="debug">
+
+	<appender name="debug" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="${webroot}/log/debug.log" />
+		<param name="Encoding" value="GB2312" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd'.bak'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value=" %d{ISO8601} [%c]- %m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter"> 
+	        <param name="LevelMin" value="debug" /> 
+	        <param name="LevelMax" value="debug" /> 
+	        <param name="acceptOnMatch" value="true" /> 
+      	</filter>		
+	</appender>
+	
+	<appender name="info" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="${webroot}/log/info.log" />
+		<param name="Encoding" value="GB2312" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd'.bak'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value=" %d{ISO8601} [%c]- %m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter"> 
+	        <param name="LevelMin" value="info" /> 
+	        <param name="LevelMax" value="info" /> 
+	        <param name="acceptOnMatch" value="true" /> 
+      	</filter>		
+	</appender>
+	
+	<appender name="error" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="threshold" value="error" />
+		<param name="File" value="${webroot}/log/error.log" />
+		<param name="Encoding" value="GB2312" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd'.bak'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value=" %d{ISO8601} [%c]- %m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter"> 
+	        <param name="LevelMin" value="error" /> 
+	        <param name="LevelMax" value="error" /> 
+	        <param name="acceptOnMatch" value="true" /> 
+      	</filter>		
+	</appender>
+	
+	<appender name="sql" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="${webroot}/log/sql.log" />
+		<param name="Encoding" value="GB2312" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd'.bak'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value=" %d{ISO8601} [%c]- %m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter"> 
+	        <param name="LevelMin" value="debug" /> 
+	        <param name="LevelMax" value="error" /> 
+	        <param name="acceptOnMatch" value="true" /> 
+      	</filter>		
+	</appender>
+	
+	<appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+   		<param name="Threshold" value="DEBUG"/>
+  		 <param name="Target" value="System.out"/>
+   		<layout class="org.apache.log4j.PatternLayout">
+  		<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %5p [%t] (%F:%L) - %m%n"/>
+   		</layout>
+   </appender>
+	
+	<!-- java.sql类输出 -->
+	<logger name="java.sql" additivity="false">
+		<level value="debug" />
+		<appender-ref ref="sql"/>
+	</logger>
+	
+	<!-- addrbook0521类输出 -->
+	<logger name="action" additivity="false">
+		<level value="debug" />
+		<appender-ref ref="debug"/>
+		<appender-ref ref="info"/>
+		<appender-ref ref="error"/>
+		<appender-ref ref="CONSOLE"/>
+	</logger>
+</log4j:configuration>
